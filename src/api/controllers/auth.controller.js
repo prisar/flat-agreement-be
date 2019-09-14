@@ -11,7 +11,7 @@ const templates = require('../../config/templates');
  */
 exports.login = async (req, res, next) => {
   try {
-    const user = await User.rupeekLogin(req.body);
+    const user = await User.appLogin(req.body);
     const userTransformed = user.transform();
 
     return res.json({

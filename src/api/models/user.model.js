@@ -10,8 +10,7 @@ const APIError = require('../utils/APIError');
 /**
 * User Roles
 */
-const WEB_ACCESS = ['superuser', 'admin', 'banker', 'branchmanager', 'lenderclerk'];
-const AGENT_ROLES = ['agent', 'branchlead', 'auditor', 'releaseagent'];
+const WEB_ACCESS = ['superuser', 'admin', 'appuser'];
 
 /**
  * User Schema
@@ -69,7 +68,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     maxlength: 8,
   },
-  lenderportalvertoken: {
+  appvertoken: {
     type: String,
     maxlength: 8,
   },
@@ -84,26 +83,10 @@ const userSchema = new mongoose.Schema({
     minlength: 6,
     maxlength: 36,
     default: 'default',
-    get: key => (key ? `https://s3.amazonaws.com/rupeek.img/${key}-big.jpg` : undefined),
+    get: key => (key ? `https://s3.amazonaws.com/sksksk.img/${key}-big.jpg` : undefined),
   },
   cityid: {
     type: Number,
-  },
-  bankerof: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'LendingPartner',
-  },
-  managerof: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'LendingBranch',
-  },
-  agentprofile: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'AgentProfile',
-  },
-  customerprofile: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'CustomerProfile',
   },
 }, {
   collection: 'user',
@@ -152,9 +135,7 @@ userSchema.statics = {
 
   WEB_ACCESS,
 
-  AGENT_ROLES,
-
-  async rupeekLogin({ username, password }) {
+  async appLogin({ username, password }) {
     const err = {
       status: httpStatus.FORBIDDEN,
       message: 'Access denied',
