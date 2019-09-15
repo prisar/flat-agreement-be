@@ -21,6 +21,7 @@ exports.create = async (req, res, next) => {
       userslug,
       username,
     };
+    console.log(userdata);
     const user = await User.create(userdata);
     return res.json({ code: httpStatus.OK, message: 'User created successfully', user: user._id });
   } catch (error) {

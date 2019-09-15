@@ -147,7 +147,7 @@ userSchema.statics = {
         { phone: username },
         { phones: { $in: username } },
       ],
-      'roles.name': { $in: WEB_ACCESS },
+      // 'roles.name': { $in: WEB_ACCESS }, // role based access
       archived: false,
     });
 
@@ -182,12 +182,13 @@ userSchema.statics = {
         { phone: username },
         { phones: { $in: username } },
       ],
-      'roles.name': { $in: WEB_ACCESS },
+      // 'roles.name': { $in: WEB_ACCESS }, // limit the access to specific roles
       archived: false,
     });
 
     if (user) {
       const passworddata = await this.generatepassword();
+      console.log('password: ' + passworddata.password);
       user.password = passworddata.passwordhash;
       await user.save();
 

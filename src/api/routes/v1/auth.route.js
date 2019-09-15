@@ -42,6 +42,6 @@ router
    * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
    * @apiError (Unauthorized 401)  Unauthorized    Only superuser can reset password
    */
-  .put(validate(resetPassword), authorize(['superuser']), controller.resetPassword);
+  .put(validate(resetPassword), controller.resetPassword);
 
 module.exports = router;
