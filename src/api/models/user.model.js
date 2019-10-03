@@ -90,6 +90,7 @@ const userSchema = new mongoose.Schema({
   },
 }, {
   collection: 'user',
+  strict: false
 });
 
 userSchema.set('toObject', { getters: true });
